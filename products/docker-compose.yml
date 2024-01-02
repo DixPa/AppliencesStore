@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  ## MYSQL - Database for Products
+  db_products:
+    container_name: db_products
+    image: mysql:8.0.33
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: db_products
+      MYSQL_USER: dixonpa
+      MYSQL_PASSWORD: 12345
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db_sql/01_table_product.sql:/docker-entrypoint-initdb.d/01_table_product.sql
+      - ./db_sql/02_add_data_products.sql:/docker-entrypoint-initdb.d/02_add_data_products.sql
+    ports:
+      - "3309:3306"
+    expose:
+      - 3309

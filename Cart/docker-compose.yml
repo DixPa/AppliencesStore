@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  ## MYSQL database for Carts
+  db_carts:
+    container_name: db_carts
+    image: mysql:8.0.33
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: db_carts
+      MYSQL_USER: dixonpa
+      MYSQL_PASSWORD: 12345
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db_sql/01_table_cart.sql:/docker-entrypoint-initdb.d/01_table_cart.sql
+      - ./db_sql/02_table_cart_items.sql:/docker-entrypoint-initdb.d/01_table_cart_items.sql
+    ports:
+      - "3307:3306"
+    expose:
+      - 3307

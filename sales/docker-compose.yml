@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db_sales:
+    container_name: db_sales
+    image: mysql:8.0.33
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: db_sales
+      MYSQL_USER: dixonpa
+      MYSQL_PASSWORD: 12345
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db_sql/01_table_sales.sql:/docker-entrypoint-initdb.d/01_table_sales.sql
+    ports:
+      - "3308:3306"
+    expose:
+      - 3308
